@@ -9,7 +9,9 @@
 
 program transform_test
 
+    USE PRFI1B_MOD      ,ONLY : PRFI1B
     write(*,*)"ici 2"
-    call inv_trans()
+
+    CALL PRFI1B()
 
 end program transform_test
