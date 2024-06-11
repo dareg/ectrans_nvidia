@@ -9,9 +9,18 @@
 
 program transform_test
 
-    USE PRFI1B_MOD      ,ONLY : PRFI1B
-    write(*,*)"ici 2"
 
-    CALL PRFI1B()
+  IMPLICIT NONE
+  INTEGER :: I,J,K
+  
+  !$ACC PARALLEL LOOP
+  DO I=1,100
+    DO J=0,100
+      DO K=1,1
+      ENDDO
+    ENDDO
+  ENDDO
+
+  write(*,*)"FIN"
 
 end program transform_test
