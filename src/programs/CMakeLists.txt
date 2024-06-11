@@ -33,15 +33,15 @@ endif()
 
 foreach( prec sp dp )
   if( HAVE_${prec} )
-    ecbuild_add_executable(TARGET  ectrans-benchmark-${prec}
-                           SOURCES ectrans-benchmark.F90
-                           LINKER_LANGUAGE Fortran
-                           LIBS
-                             fiat
-                             parkind_${prec}
-                             trans_${prec}
-                          )
-
+		#    ecbuild_add_executable(TARGET  ectrans-benchmark-${prec}
+		#                           SOURCES ectrans-benchmark.F90
+		#                           LINKER_LANGUAGE Fortran
+		#                           LIBS
+		#                             fiat
+		#                             parkind_${prec}
+		#                             trans_${prec}
+		#                          )
+		#
     if( HAVE_GPU )
       ecbuild_add_executable(TARGET  ectrans-benchmark-gpu-${prec}
                              SOURCES ectrans-benchmark.F90

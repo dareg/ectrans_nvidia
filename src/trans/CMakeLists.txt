@@ -6,7 +6,7 @@
 # granted to it by virtue of its status as an intergovernmental organisation
 # nor does it submit to any jurisdiction.
 
-add_subdirectory( cpu )
+#add_subdirectory( cpu )
 if( HAVE_GPU )
   add_subdirectory( gpu )
 endif()
