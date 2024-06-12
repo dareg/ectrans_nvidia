@@ -137,7 +137,7 @@ foreach( prec dp )
 
     # We build an object library first. And then use these objects to create a shared and static library.
 
-    ectrans_add_library(
+    ecbuild_add_library(
       TARGET           trans_gpu_object_${prec}
       TYPE             OBJECT
       SOURCES          ${trans_src}
@@ -191,11 +191,11 @@ foreach( prec dp )
     #  PUBLIC_LIBS      trans_gpu_object_${prec}
     #)
 
-    ectrans_add_library(
+    ecbuild_add_library(
       TARGET           trans_gpu_${prec}
       TYPE             STATIC
       LINKER_LANGUAGE  Fortran
-      PUBLIC_LIBS      trans_gpu_object_${prec}
+			OBJECTS      trans_gpu_object_${prec}
     )
   endif()
 endforeach()
