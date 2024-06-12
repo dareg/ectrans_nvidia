@@ -24,12 +24,12 @@ list( APPEND trans_src
 	sharedmem/sharedmem.c
 	#sharedmem/sharedmem_mod.F90
 	#algor/external/fourier/fft_wrapper.cpp
-	algor/external/growing_allocator.h
+	#algor/external/growing_allocator.h
 	#algor/external/gemm/gemm_wrapper.cpp
 	#algor/module/seefmm_mix.F90
 	#algor/module/wts500_mod.F90
-	algor/module/dilatation_mod.F90
-	algor/module/interpol_decomp_mod.F90
+	#algor/module/dilatation_mod.F90
+	#algor/module/interpol_decomp_mod.F90
 	#algor/module/butterfly_alg_mod.F90
 	#algor/module/IPC_Alltoall.cu
 	#internal/updsp_mod.F90
@@ -46,7 +46,7 @@ list( APPEND trans_src
 	#internal/uvtvd_mod.F90
 	#internal/sutrle_mod.F90
 	#internal/shuffle_mod.F90
-	internal/tpm_dim.F90
+	#internal/tpm_dim.F90
 	#internal/tpm_ctl.F90
 	#internal/trmtol_mod.F90
 	#internal/read_legpol_mod.F90
@@ -64,8 +64,8 @@ list( APPEND trans_src
 	#internal/vdtuv_mod.F90
 	#internal/trltom_mod.F90
 	#internal/sufft_mod.F90
-	internal/ext_acc.F90
-	internal/growing_allocator_mod.F90
+	#internal/ext_acc.F90
+	#internal/growing_allocator_mod.F90
 	#internal/mysendset_mod.F90
 	#internal/dist_spec_control_mod.F90
 	#internal/tpm_gen.F90
@@ -84,12 +84,12 @@ list( APPEND trans_src
 	#internal/ledir_mod.F90
 	#internal/gawl_mod.F90
 	#internal/gath_grid_ctl_mod.F90
-	internal/prfi1b_mod.F90
+	#internal/prfi1b_mod.F90
 	#internal/tpm_fftc.F90
 	#internal/tpm_distr.F90
 	#internal/tpm_pol.F90
 	#internal/cuda_gemm_batched_mod.F90
-	internal/parkind_ectrans.F90
+	#internal/parkind_ectrans.F90
 	#internal/sump_trans_mod.F90
 	#internal/trltom_pack_unpack.F90
 	#internal/cdmap_mod.F90
@@ -113,8 +113,8 @@ list( APPEND trans_src
 	#internal/dist_grid_ctl_mod.F90
 	#internal/ltdir_mod.F90
 	#internal/set_resol_mod.F90
-	internal/cpledn_mod.F90
-	internal/suwavedi_mod.F90
+	#internal/cpledn_mod.F90
+	#internal/suwavedi_mod.F90
 	#internal/tpm_stats.F90
                         )
 
@@ -141,24 +141,24 @@ foreach( prec dp )
       TARGET           trans_gpu_object_${prec}
       TYPE             OBJECT
       SOURCES          ${trans_src}
-      PUBLIC_INCLUDES  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../include>
-                       $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../include/ectrans>
-                       $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/algor/interface>
-                       $<INSTALL_INTERFACE:include/ectrans>
-                       $<INSTALL_INTERFACE:include>
-      PUBLIC_LIBS      parkind_${prec}
-                       fiat
-      PRIVATE_LIBS     OpenACC::OpenACC_Fortran
-                       CUDA::cufft
-                       CUDA::cublas
-                       MPI::MPI_Fortran
-                       MPI::MPI_C
-                       nvhpcwrapnvtx
-                       nvidia::cutlass::cutlass
-                       ${LAPACK_LIBRARIES}
+			#PUBLIC_INCLUDES  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../include>
+      #                 $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../include/ectrans>
+      #                 $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/algor/interface>
+      #                 $<INSTALL_INTERFACE:include/ectrans>
+      #                 $<INSTALL_INTERFACE:include>
+											 #PUBLIC_LIBS      parkind_${prec}
+			#fiat
+			#PRIVATE_LIBS     OpenACC::OpenACC_Fortran
+			#CUDA::cufft
+											 #CUDA::cublas
+											 #MPI::MPI_Fortran
+											 #MPI::MPI_C
+											 #nvhpcwrapnvtx
+                       #nvidia::cutlass::cutlass
+											 #${LAPACK_LIBRARIES}
     )
     # Propagate "-acc" as link flag for NVHPC Fortran linker
-    target_link_options( trans_gpu_object_${prec} INTERFACE $<$<LINK_LANG_AND_ID:Fortran,NVHPC>:-acc -cuda> )
+		#target_link_options( trans_gpu_object_${prec} INTERFACE $<$<LINK_LANG_AND_ID:Fortran,NVHPC>:-acc -cuda> )
 
     #We don't build module for the gpu files because they only implemente some part of the functionality, so we will just use the cpu module to compile and then link with the gpu version of the library and then the cpu library to fill the gaps
     #ectrans_target_fortran_module_directory(
